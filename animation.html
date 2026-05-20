@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frame Studio</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+--bgMain:#101011;
+--cardBg:#18181a;
+--txtMain:#f3efe8;
+--txtFade:#97979b;
+--highlight:#ffb703;
+--borderLine:#272729
+}
+
+html{scroll-behavior:smooth}
+
+body{
+background:var(--bgMain);
+color:var(--txtMain);
+font-family:Arial,sans-serif
+}
+
+/* header */
+
+.navWrap{
+width:100%;
+padding:20px 52px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:100;
+background:rgba(16,16,17,0.97);
+backdrop-filter:blur(6px);
+border-bottom:1px solid var(--borderLine)
+}
+
+.brand{
+font-size:28px;
+font-weight:700;
+letter-spacing:2px;
+color:var(--highlight)
+}
+
+.navList{
+display:flex;
+gap:34px;
+list-style:none
+}
+
+.navList a{
+text-decoration:none;
+color:var(--txtMain);
+font-size:14px;
+transition:0.25s
+}
+
+.navList a:hover{color:var(--highlight)}
+
+.menuIcon{
+display:none;
+flex-direction:column;
+gap:5px;
+cursor:pointer;
+background:none;
+border:none;
+padding:4px
+}
+
+.menuIcon span{
+display:block;
+width:24px;
+height:2px;
+background:var(--txtMain)
+}
+
+.mobNav{
+display:none;
+position:fixed;
+top:65px;
+left:0;
+width:100%;
+background:rgba(16,16,17,0.98);
+border-bottom:1px solid var(--borderLine);
+z-index:99;
+padding:20px 22px;
+flex-direction:column;
+gap:18px
+}
+
+.mobNav.show{display:flex}
+
+.mobNav a{
+text-decoration:none;
+color:var(--txtMain);
+font-size:15px;
+padding:8px 0;
+border-bottom:1px solid var(--borderLine)
+}
+
+.mobNav a:hover{color:var(--highlight)}
+
+.mainBtn{
+border:none;
+background:var(--highlight);
+color:#111;
+padding:10px 22px;
+font-size:14px;
+font-weight:600;
+cursor:pointer
+}
+
+/* hero */
+
+.heroSec{
+min-height:100vh;
+display:flex;
+align-items:center;
+padding:60px 52px;
+position:relative;
+overflow:hidden
+}
+
+.heroInner{max-width:850px}
+
+.smallTxt{
+font-size:12px;
+letter-spacing:5px;
+text-transform:uppercase;
+color:var(--highlight);
+margin-bottom:18px
+}
+
+.bigTxt{
+font-size:clamp(52px,10vw,138px);
+line-height:0.94;
+font-weight:700
+}
+
+.bigTxt span{color:var(--highlight)}
+
+.para{
+margin-top:28px;
+max-width:470px;
+font-size:15px;
+line-height:1.8;
+color:var(--txtFade)
+}
+
+.btnGroup{
+margin-top:42px;
+display:flex;
+gap:16px;
+flex-wrap:wrap
+}
+
+.primaryBtn{
+border:none;
+background:var(--highlight);
+color:#111;
+padding:14px 32px;
+cursor:pointer
+}
+
+.secondaryBtn{
+background:transparent;
+border:1px solid #404042;
+color:var(--txtMain);
+padding:14px 32px;
+cursor:pointer
+}
+
+.line{
+position:absolute;
+right:70px;
+top:50%;
+transform:translateY(-50%);
+width:2px;
+height:230px;
+background:linear-gradient(transparent,var(--highlight),transparent);
+opacity:0.45
+}
+
+/* about */
+
+.aboutSec{
+padding:100px 52px;
+display:flex;
+gap:80px;
+border-bottom:1px solid var(--borderLine)
+}
+
+.leftSide{min-width:180px}
+
+.leftSide p{
+font-size:11px;
+letter-spacing:4px;
+text-transform:uppercase;
+color:var(--highlight)
+}
+
+.rightSide h2{
+font-size:clamp(32px,4vw,58px);
+line-height:1.05;
+margin-bottom:25px
+}
+
+.rightSide p{
+max-width:590px;
+font-size:15px;
+line-height:1.9;
+color:var(--txtFade);
+margin-bottom:18px
+}
+
+/* services */
+
+.servicesSec{
+padding:100px 52px;
+border-bottom:1px solid var(--borderLine)
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:2px
+}
+
+.box{
+background:var(--cardBg);
+padding:38px 34px;
+border:1px solid var(--borderLine)
+}
+
+/* reviews */
+
+.reviewSec{
+padding:100px 52px;
+border-bottom:1px solid var(--borderLine)
+}
+
+.reviewGrid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px
+}
+
+.review{
+background:var(--cardBg);
+padding:34px 30px;
+border:1px solid var(--borderLine)
+}
+
+/* contact */
+
+.contactSec{
+padding:100px 52px;
+border-bottom:1px solid var(--borderLine)
+}
+
+.formWrap{
+max-width:620px;
+display:flex;
+flex-direction:column;
+gap:18px
+}
+
+.twoCol{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px
+}
+
+input,textarea,select{
+width:100%;
+padding:14px 18px;
+background:var(--cardBg);
+border:1px solid var(--borderLine);
+color:var(--txtMain);
+font-size:14px
+}
+
+.sendBtn{
+background:var(--highlight);
+border:none;
+padding:14px 32px;
+cursor:pointer
+}
+
+/* footer */
+
+.footer{
+background:var(--cardBg);
+padding:60px 52px 28px
+}
+
+/* animation */
+
+.fadeUp{
+opacity:0;
+transform:translateY(28px);
+transition:opacity 0.55s ease,transform 0.55s ease
+}
+
+.fadeUp.show{
+opacity:1;
+transform:translateY(0)
+}
+
+/* responsive */
+
+@media(max-width:1024px){
+.navWrap{padding:20px 36px}
+.heroSec{padding:60px 36px}
+.aboutSec{padding:80px 36px;gap:50px}
+.servicesSec,.reviewSec,.contactSec{padding:80px 36px}
+.footer{padding:50px 36px 24px}
+}
+
+@media(max-width:768px){
+.navList{display:none}
+.menuIcon{display:flex}
+.mainBtn{display:none}
+.heroSec{padding:50px 22px;min-height:90vh}
+.line{display:none}
+.aboutSec{padding:70px 22px;flex-direction:column;gap:24px}
+.servicesSec,.reviewSec,.contactSec{padding:70px 22px}
+.footer{padding:50px 22px 24px}
+.grid{grid-template-columns:1fr}
+.reviewGrid{grid-template-columns:1fr}
+.twoCol{grid-template-columns:1fr}
+}
+
+@media(max-width:480px){
+.heroSec{padding:40px 18px}
+.aboutSec,.servicesSec,.reviewSec,.contactSec{padding:60px 18px}
+.footer{padding:40px 18px 20px}
+.btnGroup{flex-direction:column}
+.primaryBtn,.secondaryBtn{width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<header class="navWrap">
+<div class="brand">FRAME</div>
+
+<ul class="navList">
+<li><a href="#about">About</a></li>
+<li><a href="#services">Services</a></li>
+<li><a href="#reviews">Reviews</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+
+<button class="menuIcon" id="menuBtn">
+<span></span><span></span><span></span>
+</button>
+
+<button class="mainBtn" onclick="scrollToSec('contact')">Start Now</button>
+</header>
+
+<nav class="mobNav" id="mobMenu">
+<a href="#about" onclick="hideMenu()">About</a>
+<a href="#services" onclick="hideMenu()">Services</a>
+<a href="#reviews" onclick="hideMenu()">Reviews</a>
+<a href="#contact" onclick="hideMenu()">Contact</a>
+</nav>
+
+<section class="heroSec">
+<div class="heroInner">
+<p class="smallTxt fadeUp">Creative Digital Team</p>
+<h1 class="bigTxt fadeUp">We Build <span>Modern</span><br>Brands That Feel<br>Real Online</h1>
+<p class="para fadeUp">We create websites, identities and digital experiences for brands that want to look clear, modern and trustworthy without trying too hard.</p>
+
+<div class="btnGroup fadeUp">
+<button class="primaryBtn" onclick="scrollToSec('services')">See Projects</button>
+<button class="secondaryBtn" onclick="scrollToSec('contact')">Let's Talk</button>
+</div>
+</div>
+
+<div class="line"></div>
+</section>
+
+<section class="aboutSec" id="about">
+<div class="leftSide"><p>Who We Are</p></div>
+
+<div class="rightSide">
+<h2 class="fadeUp">Small Team.<br>Clean Work.</h2>
+<p class="fadeUp">We started as a small freelance setup and slowly turned into a focused creative studio helping brands improve how they look and communicate online.</p>
+<p class="fadeUp">Most of our work revolves around branding, websites and visual systems that are simple to understand and easy to maintain long term.</p>
+</div>
+</section>
+
+<section class="servicesSec" id="services">
+<h2 class="fadeUp">What We Usually Help With</h2>
+
+<div class="grid">
+<div class="box fadeUp">Brand Identity</div>
+<div class="box fadeUp">Website Design</div>
+<div class="box fadeUp">Development</div>
+<div class="box fadeUp">Creative Support</div>
+</div>
+</section>
+
+<section class="reviewSec" id="reviews">
+<h2 class="fadeUp">What People Said</h2>
+
+<div class="reviewGrid">
+<div class="review fadeUp">The process felt smooth from day one.</div>
+<div class="review fadeUp">The redesign made our product look better.</div>
+<div class="review fadeUp">Easy team to work with.</div>
+</div>
+</section>
+
+<section class="contactSec" id="contact">
+<h2 class="fadeUp">Tell Us What You're Building</h2>
+
+<div class="formWrap fadeUp">
+<div class="twoCol">
+<input type="text" placeholder="Your Name">
+<input type="email" placeholder="Email Address">
+</div>
+
+<input type="text" placeholder="Brand or Company Name">
+
+<select>
+<option selected disabled>What do you need?</option>
+<option>Branding</option>
+<option>Website Design</option>
+<option>Development</option>
+<option>Creative Help</option>
+</select>
+
+<textarea placeholder="Tell us a bit about the project"></textarea>
+
+<button class="sendBtn">Send Message</button>
+</div>
+</section>
+
+<footer class="footer">
+<p>© 2026 Frame Studio</p>
+</footer>
+
+<script>
+
+var btn=document.getElementById("menuBtn")
+var nav=document.getElementById("mobMenu")
+
+btn.onclick=function(){
+nav.classList.toggle("show")
+}
+
+function hideMenu(){
+nav.classList.remove("show")
+}
+
+function scrollToSec(id){
+var el=document.getElementById(id)
+if(el){el.scrollIntoView({behavior:"smooth"})}
+}
+
+var items=document.querySelectorAll(".fadeUp")
+
+var obs=new IntersectionObserver(function(e){
+e.forEach(function(i){
+if(i.isIntersecting){
+i.target.classList.add("show")
+obs.unobserve(i.target)
+}
+})
+},{threshold:0.1})
+
+items.forEach(function(el){
+obs.observe(el)
+})
+
+</script>
+
+</body>
+</html>
